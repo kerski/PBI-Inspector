@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VisOps with PBI Inspector - Test Run</title>
+    <title>VisOps with PBI Inspector - Test Run (JK)</title>
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha384-Ft/vb48LwsAEtgltj7o+6vtS2esTU9PCpDqcXs4OCVQFZu5BqprHtUCZ4kjK+bpE" crossorigin="anonymous"></script>
@@ -113,17 +113,6 @@
                             "html": [{ "<>": "strong", "class": "d-block text-gray-dark", "text": "Verbose" }, { "text": "${Verbose}" }]
                         }
                     ]
-                },
-                {
-                    "<>": "div",
-                    "class": "d-flex text-body-secondary pt-3",
-                    "html": [
-                        {
-                            "<>": "p",
-                            "class": "pb-3 mb-0 small lh-sm",
-                            "html": [{ "<>": "strong", "class": "d-block text-gray-dark", "text": "Results stats" }, { "text": function () { if (this.Results != null) { return "Results count: " + this.Results.length } else { return "No results were found."} } }]
-                        }
-                    ]
                 }
             ]
         };
@@ -151,7 +140,7 @@
                                     "width": "100%",
                                     "height": "100%",
                                     "fill": function () {
-                                        if (!this.Pass) { return "#ed135d" } else { return "#0cbaf4" }
+                                        if (this.Pass) { return "#13eda4" } else { if(this.LogType === 1){return "#eda413" } else {return "#ed135d"} }
                                     }
                                 }
                             ]
@@ -202,6 +191,22 @@
                                                         {
                                                             "<>": "strong",
                                                             "class": "d-block text-gray-dark",
+                                                            "text": "Log Type"
+                                                        },
+                                                        {
+                                                            "text": function () {
+                                                                        if (this.LogType === 1) { return "Warning" } else { return "Error" }
+                                                                    }
+                                                        }
+                                                    ]
+                                                },                                                
+                                                {
+                                                    "<>": "p",
+                                                    "class": "pb-3 mb-0 small lh-sm",
+                                                    "html": [
+                                                        {
+                                                            "<>": "strong",
+                                                            "class": "d-block text-gray-dark",
                                                             "text": "Page"
                                                         },
                                                         {
@@ -238,7 +243,7 @@
                                                     ]
                                                 }
                                             ]
-                                }, { "<>": "img", "src": function () { if (this.ParentName != null) { return "PBIInspectorPNG\\" + this.Id + ".png" } else { return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAAAxJREFUGFdj+P//PwAF/gL+pzWBhAAAAABJRU5ErkJggg==" } }, "alt": "Page wireframe", "width": function () { if (this.ParentName != null) { return "65%" } else { return "1%" } }, "height": function () { if (this.ParentName != null) { return "65%" } else { return "1%" } } }
+                                        }, { "<>": "img", "src": function () { if (this.ParentName != null) { return "PBIInspectorPNG\\" + this.Id + ".png" } else { return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAAAxJREFUGFdj+P//PwAF/gL+pzWBhAAAAABJRU5ErkJggg==" } }, "alt": "Page wireframe", "width": function () { if (this.ParentName != null) { return "65%" } else { return "1%" } }, "height": "auto" }
                                     ]
                                 }
                             ]
